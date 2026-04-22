@@ -26,6 +26,7 @@ import {
   Tent,
   Eye,
   AlertTriangle,
+  Play,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { LOCATIONS, youtubeUrl, type Location, type LocationType } from "@/data/content";
@@ -266,6 +267,8 @@ function FeaturePopup({ feature, onClose }: { feature: ActiveFeature; onClose: (
 // ─── JN Location Popup ────────────────────────────────────────────────────────
 
 function LocationPopup({ location, onClose }: { location: Location; onClose: () => void }) {
+  const [playing, setPlaying] = useState(false);
+
   return (
     <Popup
       latitude={location.lat}
@@ -278,30 +281,67 @@ function LocationPopup({ location, onClose }: { location: Location; onClose: () 
         initial={{ opacity: 0, y: 6, scale: 0.97 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.15 }}
-        className="w-60 rounded-2xl bg-[#1c1410]/97 border border-white/12 shadow-[0_8px_40px_rgba(0,0,0,0.6)] overflow-hidden p-4 flex flex-col gap-3"
+        className="w-72 rounded-2xl bg-[#1c1410]/97 border border-white/12 shadow-[0_8px_40px_rgba(0,0,0,0.6)] overflow-hidden"
       >
-        <div className="flex items-start justify-between gap-2">
-          <h3 className="text-sm font-semibold leading-tight text-foreground flex-1">
-            {location.name}
-          </h3>
-          <Badge variant="outline" className={`shrink-0 text-[10px] px-1.5 py-0 ${TYPE_COLORS[location.type]}`}>
-            {location.type}
-          </Badge>
-        </div>
-        <p className="text-xs text-muted-foreground leading-relaxed">
-          {location.description}
-        </p>
+        {/* Inline video player */}
         {location.videoId && (
-          <a
-            href={youtubeUrl(location.videoId)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-lg bg-primary/10 border border-primary/25 px-3 py-2 text-xs font-medium text-primary hover:bg-primary/20 transition-colors"
-          >
-            <ExternalLink className="h-3 w-3" />
-            Watch Episode
-          </a>
+          <div className="relative aspect-video w-full bg-black">
+            {playing ? (
+              <iframe
+                src={`https://www.youtube.com/embed/${location.videoId}?autoplay=1&rel=0&modestbranding=1`}
+                className="absolute inset-0 w-full h-full"
+                allow="autoplay; encrypted-media; fullscreen"
+                allowFullScreen
+              />
+            ) : (
+              <button
+                onClick={() => setPlaying(true)}
+                className="group relative w-full h-full block"
+                aria-label={`Play ${location.name}`}
+              >
+                <img
+                  src={`https://i.ytimg.com/vi/${location.videoId}/maxresdefault.jpg`}
+                  alt={location.name}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                {/* Dark vignette */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                {/* Play button */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/90 shadow-[0_4px_24px_rgba(0,0,0,0.5)] ring-2 ring-white/20 group-hover:scale-110 group-hover:bg-primary transition-transform duration-200">
+                    <Play className="h-6 w-6 text-white ml-1" fill="white" />
+                  </div>
+                </div>
+              </button>
+            )}
+          </div>
         )}
+
+        {/* Info */}
+        <div className="p-4 flex flex-col gap-2.5">
+          <div className="flex items-start justify-between gap-2">
+            <h3 className="text-sm font-semibold leading-tight text-foreground flex-1">
+              {location.name}
+            </h3>
+            <Badge variant="outline" className={`shrink-0 text-[10px] px-1.5 py-0 ${TYPE_COLORS[location.type]}`}>
+              {location.type}
+            </Badge>
+          </div>
+          <p className="text-xs text-muted-foreground leading-relaxed">
+            {location.description}
+          </p>
+          {location.videoId && (
+            <a
+              href={youtubeUrl(location.videoId)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-[11px] font-medium text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <ExternalLink className="h-3 w-3" />
+              Open in YouTube
+            </a>
+          )}
+        </div>
       </motion.div>
     </Popup>
   );
