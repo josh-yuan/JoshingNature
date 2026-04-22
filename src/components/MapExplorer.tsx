@@ -281,7 +281,7 @@ function LocationPopup({ location, onClose }: { location: Location; onClose: () 
         initial={{ opacity: 0, y: 6, scale: 0.97 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.15 }}
-        className="w-72 rounded-2xl bg-[#1c1410]/97 border border-white/12 shadow-[0_8px_40px_rgba(0,0,0,0.6)] overflow-hidden"
+        className="w-72 rounded-2xl bg-white border border-black/8 shadow-[0_8px_40px_rgba(0,0,0,0.35)] overflow-hidden"
       >
         {/* Inline video player */}
         {location.videoId && (
@@ -320,14 +320,14 @@ function LocationPopup({ location, onClose }: { location: Location; onClose: () 
         {/* Info */}
         <div className="p-4 flex flex-col gap-2.5">
           <div className="flex items-start justify-between gap-2">
-            <h3 className="text-sm font-semibold leading-tight text-foreground flex-1">
+            <h3 className="text-sm font-semibold leading-tight text-gray-900 flex-1">
               {location.name}
             </h3>
             <Badge variant="outline" className={`shrink-0 text-[10px] px-1.5 py-0 ${TYPE_COLORS[location.type]}`}>
               {location.type}
             </Badge>
           </div>
-          <p className="text-xs text-muted-foreground leading-relaxed">
+          <p className="text-xs text-gray-500 leading-relaxed">
             {location.description}
           </p>
           {location.videoId && (
@@ -335,7 +335,7 @@ function LocationPopup({ location, onClose }: { location: Location; onClose: () 
               href={youtubeUrl(location.videoId)}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-[11px] font-medium text-muted-foreground hover:text-foreground transition-colors"
+              className="inline-flex items-center gap-1.5 text-[11px] font-medium text-gray-400 hover:text-gray-700 transition-colors"
             >
               <ExternalLink className="h-3 w-3" />
               Open in YouTube
