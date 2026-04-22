@@ -25,11 +25,11 @@ export default function Navbar() {
           {/* Logo — real wordmark */}
           <Link href="/" className="flex items-center gap-3 group">
             <Image
-              src="/logo-jn-color.png"
+              src="/logo-jn-line.png"
               alt="JN"
               width={36}
               height={36}
-              className="object-contain transition-transform duration-300 group-hover:scale-105"
+              className="object-contain invert transition-transform duration-300 group-hover:scale-105"
             />
             <Image
               src="/logo-wordmark.png"

@@ -41,7 +41,7 @@ const itemVariants = {
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
 function thumbnailUrl(videoid: string) {
-  return `https://i.ytimg.com/vi/${videoid}/hqdefault.jpg`;
+  return `https://i.ytimg.com/vi/${videoid}/maxresdefault.jpg`;
 }
 
 function youtubeUrl(videoid: string) {

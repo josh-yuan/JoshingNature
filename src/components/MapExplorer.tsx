@@ -187,7 +187,7 @@ export default function MapExplorer() {
         {...viewState}
         onMove={(e) => setViewState(e.viewState)}
         onClick={handleMapClick}
-        mapStyle="https://demotiles.maplibre.org/style.json"
+        mapStyle="https://tiles.openfreemap.org/styles/liberty"
         style={{ width: "100%", height: "100%" }}
         reuseMaps
       >

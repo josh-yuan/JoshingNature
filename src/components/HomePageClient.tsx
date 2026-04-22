@@ -79,33 +79,18 @@ function HeroSection() {
 
       {/* Content */}
       <div className="relative z-20 flex flex-col items-center gap-6 max-w-3xl mx-auto">
-        {/* JN monogram */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
-        >
-          <Image
-            src="/logo-jn-color.png"
-            alt="JN monogram"
-            width={160}
-            height={160}
-            className="w-32 sm:w-40 mx-auto drop-shadow-[0_4px_24px_rgba(0,0,0,0.7)]"
-          />
-        </motion.div>
-
         {/* Wordmark */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.25, ease: "easeOut" }}
+          transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
         >
           <Image
             src="/logo-wordmark.png"
             alt="Joshing Nature"
-            width={320}
-            height={80}
-            className="w-56 sm:w-72 mx-auto invert drop-shadow-[0_2px_16px_rgba(0,0,0,0.8)]"
+            width={600}
+            height={150}
+            className="w-72 sm:w-[480px] mx-auto invert drop-shadow-[0_2px_24px_rgba(0,0,0,0.9)]"
           />
         </motion.div>
 
@@ -165,7 +150,7 @@ function EpisodeCard({ id, title, season, index }: { id: string; title: string; 
         {/* Thumbnail */}
         <div className="relative aspect-video w-full overflow-hidden">
           <Image
-            src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`}
+            src={`https://i.ytimg.com/vi/${id}/maxresdefault.jpg`}
             alt={title}
             fill
             unoptimized
@@ -320,7 +305,7 @@ function SeasonArchiveSection() {
               >
                 <div className="relative aspect-video w-full overflow-hidden">
                   <Image
-                    src={`https://i.ytimg.com/vi/${ep.id}/hqdefault.jpg`}
+                    src={`https://i.ytimg.com/vi/${ep.id}/maxresdefault.jpg`}
                     alt={ep.title}
                     fill
                     unoptimized

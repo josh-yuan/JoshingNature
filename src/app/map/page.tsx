@@ -20,10 +20,7 @@ const MapExplorer = dynamic(() => import("@/components/MapExplorer"), {
 
 export default function MapPage() {
   return (
-    <div
-      className="flex flex-col"
-      style={{ height: "calc(100vh - 64px)", marginTop: "64px" }}
-    >
+    <div className="fixed inset-0 top-16 flex flex-col">
       {/* Page header */}
       <motion.div
         initial={{ opacity: 0, y: -16 }}
