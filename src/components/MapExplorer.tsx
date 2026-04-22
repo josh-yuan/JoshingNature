@@ -105,6 +105,38 @@ const LAYER_GROUPS: LayerGroup[] = [
 
 const ALL_INTERACTIVE = LAYER_GROUPS.flatMap((g) => g.interactive ?? []);
 
+// ─── Geo utilities ────────────────────────────────────────────────────────────
+
+// Recursively flatten all [lng, lat] pairs from any GeoJSON geometry
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function geoBBox(geometry: any): [number, number, number, number] | null {
+  const lngs: number[] = [];
+  const lats: number[] = [];
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function collect(coords: any) {
+    if (typeof coords[0] === "number") {
+      lngs.push(coords[0]);
+      lats.push(coords[1]);
+    } else {
+      coords.forEach(collect);
+    }
+  }
+
+  if (geometry?.coordinates) {
+    collect(geometry.coordinates);
+  } else if (geometry?.geometries) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    geometry.geometries.forEach((g: any) => {
+      const b = geoBBox(g);
+      if (b) { lngs.push(b[0], b[2]); lats.push(b[1], b[3]); }
+    });
+  }
+
+  if (lngs.length === 0) return null;
+  return [Math.min(...lngs), Math.min(...lats), Math.max(...lngs), Math.max(...lats)];
+}
+
 // ─── Feature classification ───────────────────────────────────────────────────
 
 type FeatureKind = {
@@ -389,7 +421,7 @@ function LayerPanel({
             })}
             <div className="mt-0.5 border-t border-white/8 pt-1.5 px-2 pb-1">
               <p className="text-[10px] text-muted-foreground/50 leading-tight">
-                Click any feature on the map to inspect it
+                Click features to inspect · Double-click park names to zoom
               </p>
             </div>
           </motion.div>
@@ -587,6 +619,50 @@ export default function MapExplorer() {
       map.on("mouseleave", layerId, () => {
         map.getCanvas().style.cursor = "";
       });
+    });
+
+    // ── Park label: zoom-in cursor + double-click to fit bounds ───────────
+    map.on("mouseenter", "park_label", () => {
+      map.getCanvas().style.cursor = "zoom-in";
+    });
+    map.on("mouseleave", "park_label", () => {
+      map.getCanvas().style.cursor = "";
+    });
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    map.on("dblclick", "park_label", (e: any) => {
+      e.preventDefault(); // suppress default double-click zoom
+      const f = e.features?.[0];
+      if (!f) return;
+
+      const name = f.properties?.name || f.properties?.name_en;
+
+      // Query all loaded tiles for this park to get the most complete geometry
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const queryOpts: any = { sourceLayer: "park" };
+      if (name) {
+        queryOpts.filter = ["==", ["coalesce", ["get", "name"], ["get", "name_en"]], name];
+      }
+
+      const allFeatures = map.querySourceFeatures("openmaptiles", queryOpts);
+
+      let minLng = Infinity, minLat = Infinity, maxLng = -Infinity, maxLat = -Infinity;
+      for (const sf of allFeatures) {
+        const bbox = geoBBox(sf.geometry);
+        if (bbox) {
+          if (bbox[0] < minLng) minLng = bbox[0];
+          if (bbox[1] < minLat) minLat = bbox[1];
+          if (bbox[2] > maxLng) maxLng = bbox[2];
+          if (bbox[3] > maxLat) maxLat = bbox[3];
+        }
+      }
+
+      if (minLng === Infinity) return;
+
+      map.fitBounds(
+        [[minLng, minLat], [maxLng, maxLat]],
+        { padding: 60, duration: 900, maxZoom: 12 },
+      );
     });
   }, []);
 
