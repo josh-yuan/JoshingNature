@@ -81,8 +81,9 @@ const LAYER_GROUPS: LayerGroup[] = [
     id: "parks",
     label: "Parks & Reserves",
     Icon: TreePine,
-    layers: ["park", "park_outline"],
-    interactive: ["park"],
+    // park_label is a custom layer added in handleMapLoad
+    layers: ["park", "park_outline", "park_label"],
+    interactive: [], // labels render in-situ; no click popup for areas
     defaultOn: true,
   },
   {
@@ -475,6 +476,50 @@ export default function MapExplorer() {
     const map = mapRef.current?.getMap();
     if (!map) return;
 
+    // ── Park / wilderness / protected area name labels ─────────────────────
+    // The liberty style has park fill + outline but no label layer.
+    // We add one using the same openmaptiles source.
+    if (!map.getLayer("park_label")) {
+      map.addLayer(
+        {
+          id: "park_label",
+          type: "symbol",
+          source: "openmaptiles",
+          "source-layer": "park",
+          minzoom: 6,
+          layout: {
+            "symbol-placement": "point",
+            "text-field": ["coalesce", ["get", "name_en"], ["get", "name"]],
+            "text-font": ["Noto Sans Italic"],
+            "text-size": [
+              "interpolate", ["linear"], ["zoom"],
+              6, 9,
+              9, 12,
+              12, 15,
+            ],
+            "text-letter-spacing": 0.18,
+            "text-max-width": 9,
+            "text-transform": "uppercase",
+            "text-allow-overlap": false,
+            "text-ignore-placement": false,
+            "text-padding": 8,
+            "visibility": "visible",
+          },
+          paint: {
+            "text-color": "#6db87e",
+            "text-opacity": [
+              "interpolate", ["linear"], ["zoom"],
+              6, 0.55,
+              10, 0.80,
+            ],
+            "text-halo-color": "rgba(18, 12, 8, 0.75)",
+            "text-halo-width": 1.5,
+          },
+        },
+        "poi_r20", // insert below POI icons
+      );
+    }
+
     // ── Hiking routes overlay ──────────────────────────────────────────────
     if (!map.getSource("hiking-routes")) {
       map.addSource("hiking-routes", {
@@ -532,7 +577,7 @@ export default function MapExplorer() {
       try { map.setPaintProperty(id, "line-opacity", 0.85); } catch {}
     });
 
-    // ── Cursor on hover ────────────────────────────────────────────────────
+    // ── Cursor on hover (skip park — it uses inline labels now) ───────────
     ALL_INTERACTIVE.forEach((layerId) => {
       if (!map.getLayer(layerId)) return;
       map.on("mouseenter", layerId, () => {
