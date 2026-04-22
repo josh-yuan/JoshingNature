@@ -194,7 +194,7 @@ function FeaturePopup({ feature, onClose }: { feature: ActiveFeature; onClose: (
   const kind = classifyFeature(sourceLayer, p);
   const Icon = kind.Icon;
 
-  const name = (p.name_en || p.name) as string | undefined;
+  const name = (p.name_en || p.name || p.ref) as string | undefined;
   const ele = p.ele != null ? Math.round(Number(p.ele)) : null;
   const surface = p.surface as string | undefined;
   const trailVis = p.trail_visibility as string | undefined;
@@ -673,17 +673,35 @@ export default function MapExplorer() {
     const map = mapRef.current?.getMap();
     if (!map) return;
 
-    const features = map.queryRenderedFeatures(e.point, { layers: ALL_INTERACTIVE });
+    // Also query the name layer so we can pull trail names into the popup
+    const features = map.queryRenderedFeatures(e.point, {
+      layers: [...ALL_INTERACTIVE, "highway-name-path"],
+    });
 
     if (features.length > 0) {
       const f = features[0];
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      let props = (f.properties ?? {}) as Record<string, any>;
+      let sourceLayer = f.sourceLayer ?? "";
+
+      // transportation_name has the name but not physical attributes (surface, sac_scale).
+      // transportation has the physical attributes but no name.
+      // Merge both so the popup gets everything.
+      if (sourceLayer === "transportation_name") {
+        const geo = features.find((ft) => ft.sourceLayer === "transportation");
+        if (geo?.properties) props = { ...geo.properties, ...props };
+        sourceLayer = "transportation";
+      } else if (sourceLayer === "transportation") {
+        const nameF = features.find((ft) => ft.sourceLayer === "transportation_name");
+        if (nameF?.properties) props = { ...props, ...nameF.properties };
+      }
+
       setActiveLocation(null);
       setActiveFeature({
         lng: e.lngLat.lng,
         lat: e.lngLat.lat,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        properties: (f.properties ?? {}) as Record<string, any>,
-        sourceLayer: f.sourceLayer ?? "",
+        properties: props,
+        sourceLayer,
         layerId: f.layer.id,
       });
     } else {
