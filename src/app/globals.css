@@ -83,6 +83,24 @@
   }
 }
 
+/* ─── MapLibre popup overrides ─────────────────────────────────────────────── */
+.maplibregl-popup-content {
+  background: transparent !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+.maplibregl-popup-tip {
+  display: none !important;
+}
+.maplibregl-popup-close-button {
+  display: none !important;
+}
+/* Cursor pointer on interactive map features */
+.maplibregl-canvas-container.maplibregl-interactive {
+  cursor: inherit;
+}
+
 @layer utilities {
   .glow-brand {
     box-shadow: 0 0 20px oklch(0.56 0.19 25 / 30%),
