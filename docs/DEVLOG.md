@@ -68,6 +68,22 @@ Using the winter lookout thumbnail as the hero because it's the most visually st
 
 ---
 
+## 2026-06-12
+
+### "Old-Growth" redesign — pine green base, marble white type
+
+Josh asked for greener, richer base colors with marble white wording. Full palette overhaul in `globals.css` (design doc: `docs/superpowers/specs/2026-06-12-old-growth-redesign-design.md`). Key decisions:
+
+- Trout red survives as the pop color but is now reserved for CTAs only — red on green is a natural complement, and spreading it thinner makes it hit harder.
+- New fern green accent (`oklch(0.74 0.14 145)`) takes over links/active states/eyebrows; bamboo tan demoted to supporting badges.
+- Body background is layered radial gradients over the pine base (fixed attachment) so the page never reads as a flat fill — "canopy light."
+- Fraunces variable serif on h1–h3 to pair with the handwritten logo; Geist stays for body text.
+- Map surfaces were hardcoded `#1c1410` in 10 places (MapExplorer + SearchBar) — replaced with `#0c2417`. Worth tokenizing these next time they're touched.
+- Replaced the dead `grid-bg` class on /videos (it had no definition since the brand redesign) with the new `.topo-bg` contour texture.
+- Elevation profile chart retinted from blue to fern — blue collided with the "Moderate" SAC difficulty color.
+
+---
+
 ## Recurring TODOs
 
 These keep coming up and aren't done yet:
@@ -76,7 +92,8 @@ These keep coming up and aren't done yet:
 - [ ] Connect GitHub → Vercel auto-deploy in dashboard
 - [ ] Purchase `joshingnature.com` domain and wire DNS in Vercel
 - [ ] Add MapTiler free API key for contour lines / outdoor style
-- [ ] Set `git config --global user.name "Josh Yuan"` and `user.email` on the machine
+- [x] Set `git config --global user.name "Josh Yuan"` — done 2026-04-22
+- [ ] Set `git config --global user.email "joshingnaturepnw@gmail.com"` — command failed (shell newline), still needed
 - [ ] Wire real YouTube API key for dynamic video fetching (vs. hardcoded IDs)
 - [ ] Set up Sanity CMS for content management
 - [ ] Optimize hero image (WebP, proper srcset)

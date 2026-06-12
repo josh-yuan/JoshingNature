@@ -215,7 +215,7 @@ function FeaturePopup({ feature, onClose }: { feature: ActiveFeature; onClose: (
         initial={{ opacity: 0, y: 6, scale: 0.97 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.15 }}
-        className="w-64 rounded-2xl bg-[#1c1410]/97 border border-white/12 shadow-[0_8px_40px_rgba(0,0,0,0.6)] overflow-hidden"
+        className="w-64 rounded-2xl bg-[#0c2417]/97 border border-white/12 shadow-[0_8px_40px_rgba(0,0,0,0.6)] overflow-hidden"
       >
         <div className="flex items-center gap-2.5 px-4 pt-4 pb-3">
           <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border ${kind.border} ${kind.bg}`}>
@@ -343,7 +343,7 @@ function TypeIcon({ type, className }: { type: LocationType; className?: string 
 const TYPE_COLORS: Record<LocationType, string> = {
   "Fire Lookout": "bg-primary/15 text-primary border-primary/30",
   "Alpine Lake":  "bg-accent/15 text-accent border-accent/30",
-  "Backpacking":  "bg-stone-500/15 text-stone-400 border-stone-500/30",
+  "Backpacking":  "bg-tan/15 text-tan border-tan/30",
   "Coastal":      "bg-sky-500/15 text-sky-400 border-sky-500/30",
   "Alpine":       "bg-orange-500/15 text-orange-400 border-orange-500/30",
 };
@@ -356,7 +356,7 @@ function LocationMarker({ location, active, onClick }: { location: Location; act
       <div className={`flex h-9 w-9 items-center justify-center rounded-full border-2 shadow-lg transition-all duration-200 ${
         active
           ? "bg-primary border-primary text-primary-foreground scale-125 shadow-[0_0_16px_oklch(0.56_0.19_25_/_50%)]"
-          : "bg-[#1c1410] border-accent/50 text-accent hover:border-primary hover:bg-primary/20 hover:scale-110"
+          : "bg-[#0c2417] border-accent/50 text-accent hover:border-primary hover:bg-primary/20 hover:scale-110"
       }`}>
         <TypeIcon type={location.type} className="h-4 w-4" />
       </div>
@@ -379,7 +379,7 @@ function LayerPanel({ visibility, onToggle }: { visibility: Record<string, boole
     >
       <button
         onClick={() => setExpanded((v) => !v)}
-        className="flex items-center gap-2 rounded-xl bg-[#1c1410]/92 border border-white/12 px-3 py-2 backdrop-blur-sm hover:border-white/20 transition-colors shadow-lg"
+        className="flex items-center gap-2 rounded-xl bg-[#0c2417]/92 border border-white/12 px-3 py-2 backdrop-blur-sm hover:border-white/20 transition-colors shadow-lg"
       >
         <Layers className="h-3.5 w-3.5 text-accent shrink-0" />
         <span className="text-xs font-semibold text-foreground">Layers</span>
@@ -393,7 +393,7 @@ function LayerPanel({ visibility, onToggle }: { visibility: Record<string, boole
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -6, scale: 0.97 }}
             transition={{ duration: 0.15 }}
-            className="flex flex-col gap-0.5 rounded-xl bg-[#1c1410]/95 border border-white/12 p-1.5 backdrop-blur-md shadow-2xl"
+            className="flex flex-col gap-0.5 rounded-xl bg-[#0c2417]/95 border border-white/12 p-1.5 backdrop-blur-md shadow-2xl"
           >
             {LAYER_GROUPS.map((group) => {
               const active = visibility[group.id] ?? group.defaultOn;
@@ -463,7 +463,7 @@ function Sidebar({
     <>
       <button
         onClick={onToggle}
-        className="absolute right-4 top-4 z-30 flex h-9 w-9 items-center justify-center rounded-full bg-[#1c1410]/90 border border-white/10 text-muted-foreground hover:text-foreground backdrop-blur-sm transition-colors"
+        className="absolute right-4 top-4 z-30 flex h-9 w-9 items-center justify-center rounded-full bg-[#0c2417]/90 border border-white/10 text-muted-foreground hover:text-foreground backdrop-blur-sm transition-colors"
         aria-label={open ? "Close sidebar" : "Open sidebar"}
       >
         {open ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
@@ -476,7 +476,7 @@ function Sidebar({
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: "100%", opacity: 0 }}
             transition={{ type: "spring", stiffness: 320, damping: 32 }}
-            className="absolute right-0 top-0 bottom-0 z-20 w-72 bg-[#1c1410]/95 border-l border-white/8 backdrop-blur-md flex flex-col"
+            className="absolute right-0 top-0 bottom-0 z-20 w-72 bg-[#0c2417]/95 border-l border-white/8 backdrop-blur-md flex flex-col"
           >
             {/* Tab bar */}
             <div className="flex shrink-0 border-b border-white/8">
@@ -658,7 +658,7 @@ export default function MapExplorer() {
           paint: {
             "text-color": "#5a9e6a",
             "text-opacity": ["interpolate", ["linear"], ["zoom"], 8, 0.30, 12, 0.50],
-            "text-halo-color": "rgba(18, 12, 8, 0.5)",
+            "text-halo-color": "rgba(8, 20, 13, 0.5)",
             "text-halo-width": 1,
           },
         },
@@ -951,7 +951,7 @@ export default function MapExplorer() {
         transition={{ delay: 0.4, duration: 0.3 }}
         onClick={handleNearMe}
         disabled={geolocating}
-        className="absolute left-4 bottom-28 z-30 flex h-9 w-9 items-center justify-center rounded-full bg-[#1c1410]/92 border border-white/12 text-muted-foreground hover:text-foreground hover:border-white/25 backdrop-blur-sm transition-colors shadow-lg disabled:opacity-40"
+        className="absolute left-4 bottom-28 z-30 flex h-9 w-9 items-center justify-center rounded-full bg-[#0c2417]/92 border border-white/12 text-muted-foreground hover:text-foreground hover:border-white/25 backdrop-blur-sm transition-colors shadow-lg disabled:opacity-40"
         aria-label="Fly to my location"
         title="Near me"
       >
@@ -966,7 +966,7 @@ export default function MapExplorer() {
         initial={{ opacity: 0, x: -16 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.4, duration: 0.5 }}
-        className="absolute left-4 bottom-12 z-10 rounded-xl bg-[#1c1410]/90 border border-white/8 px-3 py-2 backdrop-blur-sm font-mono text-[11px] text-muted-foreground"
+        className="absolute left-4 bottom-12 z-10 rounded-xl bg-[#0c2417]/90 border border-white/8 px-3 py-2 backdrop-blur-sm font-mono text-[11px] text-muted-foreground"
       >
         <div className="flex items-center gap-1.5">
           <MapPin className="h-3 w-3 text-primary" />

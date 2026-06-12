@@ -74,8 +74,9 @@ function HeroSection() {
         />
       </div>
 
-      {/* Dark cinematic overlay */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/60 via-black/30 to-background" />
+      {/* Cinematic forest overlay — deep pine pooling into the canopy */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-b from-pine/75 via-pine/30 to-background" />
+      <div className="absolute inset-0 z-10 bg-[radial-gradient(ellipse_60%_50%_at_50%_100%,oklch(0.30_0.08_150/35%),transparent_70%)]" />
 
       {/* Content */}
       <div className="relative z-20 flex flex-col items-center gap-6 max-w-3xl mx-auto">
@@ -187,10 +188,10 @@ function LatestEpisodesSection() {
       <div className="mx-auto max-w-6xl">
         <AnimatedSection className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between" direction="up">
           <div>
-            <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-primary">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-accent">
               New Episodes
             </p>
-            <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            <h2 className="text-3xl font-bold tracking-tight text-marble sm:text-4xl">
               Latest from the Channel
             </h2>
           </div>
@@ -218,22 +219,13 @@ function LatestEpisodesSection() {
 ───────────────────────────────────────────── */
 function PillarsSection() {
   return (
-    <section className="relative px-4 py-20 sm:py-28">
-      {/* Subtle warm glow behind section */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0"
-        style={{
-          background:
-            "radial-gradient(ellipse 70% 40% at 50% 50%, oklch(0.56 0.19 25 / 5%) 0%, transparent 70%)",
-        }}
-      />
-
+    <section className="relative px-4 py-20 sm:py-28 canopy-band topo-bg">
       <div className="relative z-10 mx-auto max-w-6xl">
         <AnimatedSection className="mb-12 text-center" direction="up">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-primary">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-accent">
             What We Do
           </p>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-marble sm:text-4xl text-glow">
             Built Around the Wild
           </h2>
           <p className="mx-auto mt-3 max-w-lg text-muted-foreground">
@@ -246,7 +238,7 @@ function PillarsSection() {
             const Icon = pillar.icon;
             return (
               <AnimatedSection key={pillar.title} delay={i * 0.12} direction="up">
-                <div className="group h-full rounded-xl border border-white/8 bg-card p-6 transition-all duration-300 hover:border-primary/40 hover:glow-brand-sm hover:-translate-y-1">
+                <div className="group h-full rounded-xl border border-white/8 bg-card/80 p-6 backdrop-blur-sm transition-all duration-300 hover:border-accent/40 hover:glow-fern-sm hover:-translate-y-1">
                   <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-accent/25 bg-accent/10 transition-colors duration-300 group-hover:border-accent/50 group-hover:bg-accent/18">
                     <Icon className="h-5 w-5 text-accent" />
                   </div>
@@ -278,7 +270,7 @@ function SeasonArchiveSection() {
             <Badge variant="outline" className="mb-3 text-xs tracking-widest uppercase border-accent/40 text-accent">
               Season 1 — Now Complete
             </Badge>
-            <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            <h2 className="text-3xl font-bold tracking-tight text-marble sm:text-4xl">
               Where It All Started
             </h2>
             <p className="mt-2 text-muted-foreground max-w-md">
@@ -338,15 +330,15 @@ function SeasonArchiveSection() {
 function SubscribeSection() {
   return (
     <section className="relative px-4 py-24 sm:py-32 overflow-hidden">
-      {/* Warm background band */}
+      {/* Forest-fire band — green canopy with the trout-red ember at center */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
         style={{
           background:
-            "radial-gradient(ellipse 80% 60% at 50% 50%, oklch(0.56 0.19 25 / 8%) 0%, transparent 70%)",
+            "radial-gradient(ellipse 80% 60% at 50% 50%, oklch(0.56 0.19 25 / 8%) 0%, transparent 70%), radial-gradient(ellipse 100% 80% at 50% 100%, oklch(0.30 0.07 150 / 35%) 0%, transparent 70%)",
         }}
       />
-      <div className="absolute inset-0 z-0 border-y border-white/6" />
+      <div className="absolute inset-0 z-0 border-y border-accent/15" />
 
       <AnimatedSection className="relative z-10 mx-auto max-w-xl text-center" direction="up">
         {/* JN monogram */}
@@ -360,7 +352,7 @@ function SubscribeSection() {
           />
         </div>
 
-        <h2 className="mb-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+        <h2 className="mb-3 text-3xl font-bold tracking-tight text-marble sm:text-4xl">
           New Episodes on YouTube
         </h2>
         <p className="mb-8 text-muted-foreground leading-relaxed">

@@ -18,7 +18,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/30 bg-background/85 backdrop-blur-md">
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-pine/80 backdrop-blur-md">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
 
@@ -50,14 +50,14 @@ export default function Navbar() {
                   href={href}
                   className={`relative px-4 py-2 text-sm font-medium rounded-full transition-colors ${
                     active
-                      ? "text-primary"
+                      ? "text-accent"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   {active && (
                     <motion.span
                       layoutId="nav-pill"
-                      className="absolute inset-0 rounded-full bg-primary/10 border border-primary/25"
+                      className="absolute inset-0 rounded-full bg-accent/10 border border-accent/30"
                       transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     />
                   )}
@@ -69,7 +69,7 @@ export default function Navbar() {
               href="https://www.youtube.com/@JoshingNature"
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-2 px-4 py-2 text-sm font-medium rounded-full bg-primary/10 border border-primary/25 text-primary hover:bg-primary/20 transition-colors"
+              className="ml-2 px-4 py-2 text-sm font-medium rounded-full bg-primary text-primary-foreground hover:brightness-110 transition-all glow-brand-sm"
             >
               Subscribe
             </a>
@@ -94,7 +94,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden border-t border-border/30 bg-background/95 backdrop-blur-md"
+            className="md:hidden border-t border-border/40 bg-pine/95 backdrop-blur-md"
           >
             <nav className="flex flex-col px-4 py-3 gap-1">
               {links.map(({ href, label }) => {
@@ -106,7 +106,7 @@ export default function Navbar() {
                     onClick={() => setOpen(false)}
                     className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
                       active
-                        ? "bg-primary/10 text-primary border border-primary/25"
+                        ? "bg-accent/10 text-accent border border-accent/30"
                         : "text-muted-foreground hover:text-foreground hover:bg-secondary"
                     }`}
                   >
@@ -119,7 +119,7 @@ export default function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setOpen(false)}
-                className="px-4 py-3 rounded-lg text-sm font-medium bg-primary/10 text-primary border border-primary/25 text-center"
+                className="px-4 py-3 rounded-lg text-sm font-medium bg-primary text-primary-foreground text-center glow-brand-sm"
               >
                 Subscribe on YouTube
               </a>

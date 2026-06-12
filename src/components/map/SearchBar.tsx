@@ -114,7 +114,7 @@ export default function SearchBar({ onSelect }: { onSelect: (r: SearchResult) =>
       className="absolute top-4 left-1/2 -translate-x-1/2 z-30 w-80 max-w-[calc(100vw-8rem)]"
     >
       <div
-        className={`flex items-center gap-2 rounded-2xl bg-[#1c1410]/95 border backdrop-blur-md px-3 py-2.5 shadow-[0_4px_24px_rgba(0,0,0,0.4)] transition-colors ${
+        className={`flex items-center gap-2 rounded-2xl bg-[#0c2417]/95 border backdrop-blur-md px-3 py-2.5 shadow-[0_4px_24px_rgba(0,0,0,0.4)] transition-colors ${
           open ? "border-accent/35" : "border-white/12"
         }`}
       >
@@ -147,7 +147,7 @@ export default function SearchBar({ onSelect }: { onSelect: (r: SearchResult) =>
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -4, scale: 0.98 }}
             transition={{ duration: 0.12 }}
-            className="mt-1.5 rounded-2xl bg-[#1c1410]/97 border border-white/12 shadow-[0_8px_40px_rgba(0,0,0,0.5)] overflow-hidden backdrop-blur-md"
+            className="mt-1.5 rounded-2xl bg-[#0c2417]/97 border border-white/12 shadow-[0_8px_40px_rgba(0,0,0,0.5)] overflow-hidden backdrop-blur-md"
           >
             {results.slice(0, 7).map((r) => {
               const isJN = r.type === "jn";

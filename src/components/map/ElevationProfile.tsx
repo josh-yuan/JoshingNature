@@ -53,12 +53,12 @@ function Sparkline({ points }: { points: ElevPoint[] }) {
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-lg overflow-hidden" style={{ height: H }}>
         <defs>
           <linearGradient id="eg" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#60a5fa" stopOpacity="0.4" />
-            <stop offset="100%" stopColor="#60a5fa" stopOpacity="0.03" />
+            <stop offset="0%" stopColor="#6fd693" stopOpacity="0.4" />
+            <stop offset="100%" stopColor="#6fd693" stopOpacity="0.03" />
           </linearGradient>
         </defs>
         <path d={fillD} fill="url(#eg)" />
-        <path d={pathD} fill="none" stroke="#60a5fa" strokeWidth="1.5" strokeLinejoin="round" strokeLinecap="round" />
+        <path d={pathD} fill="none" stroke="#6fd693" strokeWidth="1.5" strokeLinejoin="round" strokeLinecap="round" />
         <line x1="0" y1={H - PAD_B} x2={W} y2={H - PAD_B} stroke="rgba(255,255,255,0.08)" strokeWidth="0.5" />
         <text x="1" y={H - 5} fontSize="8" fill="rgba(255,255,255,0.3)">{Math.round(minE)}m</text>
         <text x={W - 1} y={H - 5} fontSize="8" fill="rgba(255,255,255,0.3)" textAnchor="end">{Math.round(maxE)}m</text>

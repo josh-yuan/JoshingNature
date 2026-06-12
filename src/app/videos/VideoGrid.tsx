@@ -86,7 +86,7 @@ function CategoryBadge({ category }: { category: VideoCategory }) {
   return (
     <Badge
       variant="outline"
-      className="shrink-0 text-[11px] px-2 py-0.5 border bg-stone-500/15 text-stone-400 border-stone-500/30"
+      className="shrink-0 text-[11px] px-2 py-0.5 border bg-tan/15 text-tan border-tan/30"
     >
       Adventures
     </Badge>
@@ -225,7 +225,7 @@ export default function VideoGrid({ videos }: { videos: VideoItem[] }) {
             className={`relative px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-ring
               ${
                 activeTab === tab
-                  ? "bg-primary text-primary-foreground shadow-[0_0_14px_oklch(0.56_0.19_25_/_35%)]"
+                  ? "bg-accent text-accent-foreground shadow-[0_0_14px_oklch(0.74_0.14_145_/_35%)]"
                   : "bg-secondary text-muted-foreground hover:text-foreground hover:bg-secondary/80"
               }`}
           >

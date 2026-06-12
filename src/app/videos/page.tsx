@@ -98,8 +98,8 @@ const VIDEOS: VideoItem[] = [
 export default function VideosPage() {
   return (
     <div className="flex flex-col min-h-screen pt-24 pb-16">
-      {/* Background texture */}
-      <div className="fixed inset-0 grid-bg opacity-40 pointer-events-none" />
+      {/* Background texture — faint topographic contours */}
+      <div className="fixed inset-0 topo-bg opacity-60 pointer-events-none" />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col gap-12">
         {/* Page Header */}
@@ -112,7 +112,7 @@ export default function VideosPage() {
           </div>
 
           <div className="flex flex-col gap-2 max-w-2xl">
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-foreground text-glow">
+            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-marble text-glow">
               Episodes
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
@@ -126,7 +126,7 @@ export default function VideosPage() {
               const count = VIDEOS.filter((v) => v.season === season).length;
               return (
                 <span key={season} className="flex items-center gap-1.5">
-                  <span className="h-1.5 w-1.5 rounded-full bg-primary/60" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent/70" />
                   <span>
                     Season {season.slice(1)} — {count} episode
                     {count !== 1 ? "s" : ""}

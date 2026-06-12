@@ -25,13 +25,15 @@
 
 ## Brand
 
-**Aesthetic:** Warm, organic, hand-crafted. REI × personal outdoor creator × fly fishing brand. NOT dark/techy/glassmorphic.
+**Aesthetic:** "Old-Growth" (June 2026 redesign, see `docs/superpowers/specs/2026-06-12-old-growth-redesign-design.md`) — deep rich pine greens, marble white type, organic and vibrant. Still hand-crafted/illustration-forward, NOT techy/glassmorphic.
 
 **Color palette:**
-- Background: `oklch(0.10 0.012 55)` — warm near-black brown (~#1c1410)
-- Primary: `oklch(0.56 0.19 25)` — trout red (#d4453a) — the brand pop color
-- Accent: `oklch(0.70 0.09 75)` — bamboo/tan (#c4a47c)
-- Foreground: warm off-white
+- Background: `oklch(0.18 0.045 158)` — deep pine green (map surfaces use hex `#0c2417`)
+- Foreground: `oklch(0.965 0.006 120)` — marble white
+- Primary: `oklch(0.56 0.19 25)` — trout red (#d4453a) — brand pop, CTAs only
+- Accent: `oklch(0.74 0.14 145)` — vibrant fern green (links, active states, eyebrows)
+- Tan: `oklch(0.70 0.09 75)` — bamboo (#c4a47c), supporting badges
+- Display font: Fraunces (h1–h3); Geist for body
 
 **Logo assets** (in `public/`):
 - `logo-jn-color.png` — JN monogram (fish + bamboo), WHITE background (not transparent)
